@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blue Austin Agave Ranch — Austin, TX</title>
+<title>Blue Austin Agave Ranch House — Austin, TX</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -100,62 +100,22 @@ nav.scrolled {
   padding: 8rem 4rem 5rem;
   position: relative; overflow: hidden;
 }
-
-/* ===== VIDEO BACKGROUND ===== */
-.hero-video-wrap {
-  position: absolute; inset: 0; z-index: 0;
-  overflow: hidden;
-}
-.hero-video-wrap video {
-  position: absolute;
-  top: 50%; left: 50%;
-  min-width: 100%; min-height: 100%;
-  width: auto; height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.8s ease-in-out;
-}
-.hero-video-wrap video.active {
-  opacity: 1;
-}
-/* Dark + color overlay on top of videos */
-.hero-video-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background:
-    linear-gradient(180deg,
-      rgba(13,13,13,0.45) 0%,
-      rgba(13,13,13,0.25) 30%,
-      rgba(13,13,13,0.5) 70%,
-      rgba(13,13,13,0.85) 100%
-    );
-  pointer-events: none;
-}
-.hero-video-overlay::after {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255,94,58,0.12), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 20% 70%, rgba(0,191,165,0.08), transparent 50%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,190,46,0.06), transparent 40%);
-}
-
 .hero::before {
   content: '';
-  position: absolute; inset: 0; z-index: 1;
+  position: absolute; inset: 0;
   background:
     radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255,94,58,0.15), transparent 60%),
     radial-gradient(ellipse 60% 50% at 20% 70%, rgba(0,191,165,0.1), transparent 50%),
     radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,190,46,0.08), transparent 40%);
 }
 .hero-grid-lines {
-  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  position: absolute; inset: 0; pointer-events: none;
   background-image:
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 80px 80px;
 }
-.hero-content { position: relative; z-index: 3; max-width: 900px; }
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
 
 /* ===== HOWDY NEON ===== */
 .howdy {
@@ -1129,7 +1089,7 @@ footer {
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-brand">Blue Austin <span>Agave Ranch</span></div>
+  <div class="nav-brand">Blue Austin <span>Agave Ranch House</span></div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#amenities">Amenities</a>
@@ -1141,23 +1101,6 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <!-- Video Background -->
-  <div class="hero-video-wrap" id="videoWrap">
-    <!--
-      HOW TO ADD YOUR VIDEOS:
-      1. Download 3-5 free Austin clips from pexels.com/search/videos/austin%20texas/
-         or pixabay.com/videos/search/austin/ (royalty-free, no attribution needed)
-      2. Recommended clips: skyline aerial, Congress Ave, Lady Bird Lake, South Congress, live music
-      3. Keep files under 10MB each for fast loading (use 720p or 1080p)
-      4. Place the .mp4 files in your site folder and update the src paths below
-      5. The system auto-crossfades between videos every 8 seconds
-    -->
-    <video class="hero-vid active" src="https://videos.pexels.com/video-files/3888545/3888545-hd_1920_1080_24fps.mp4" muted autoplay loop playsinline></video>
-    <video class="hero-vid" src="https://videos.pexels.com/video-files/3888483/3888483-hd_1920_1080_24fps.mp4" muted autoplay loop playsinline></video>
-    <video class="hero-vid" src="https://videos.pexels.com/video-files/4767720/4767720-hd_1920_1080_30fps.mp4" muted autoplay loop playsinline></video>
-  </div>
-  <div class="hero-video-overlay"></div>
-
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
     <div class="hero-pill"><span class="dot"></span> Now Accepting Reservations</div>
@@ -1207,7 +1150,7 @@ footer {
   <div class="about-text reveal">
     <div class="stag">About the Home</div>
     <h2 class="stitle">Designed for Memorable Stays</h2>
-    <p>Blue Austin Agave Ranch isn't just a place to sleep — it's your Austin basecamp. We've filled every room with natural light, modern comforts, and the kind of thoughtful touches that make guests rebook before they've even checked out.</p>
+    <p>Blue Austin Agave Ranch House isn't just a place to sleep — it's your Austin basecamp. We've filled every room with natural light, modern comforts, and the kind of thoughtful touches that make guests rebook before they've even checked out.</p>
     <p>Three spacious bedrooms, a fully loaded kitchen, a backyard patio built for evening hangs, and a location that puts you right in the action.</p>
     <div class="about-tags">
       <span>🌿 Private Patio</span>
@@ -1335,7 +1278,7 @@ footer {
 <section class="booking-section" id="booking">
   <div class="book-content">
     <div class="stag">Reserve Your Stay</div>
-    <h2 class="stitle">Book Blue Austin Agave Ranch</h2>
+    <h2 class="stitle">Book Blue Austin Agave Ranch House</h2>
     <p class="ssub">Pick your platform or reach out directly</p>
 
     <div class="platform-row">
@@ -1464,8 +1407,8 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="foot-brand">Blue Austin <span>Agave Ranch</span> · Austin, TX</div>
-  <div class="foot-copy">© 2026 Blue Austin Agave Ranch</div>
+  <div class="foot-brand">Blue Austin <span>Agave Ranch House</span> · Austin, TX</div>
+  <div class="foot-copy">© 2026 Blue Austin Agave Ranch House</div>
   <div class="foot-links">
     <a href="#about">About</a>
     <a href="#amenities">Amenities</a>
@@ -1475,42 +1418,6 @@ footer {
 </footer>
 
 <script>
-// ===== BOOKING SUCCESS CHECK =====
-if (window.location.search.includes('booking=success')) {
-  const banner = document.createElement('div');
-  banner.style.cssText = `
-    position:fixed;top:0;left:0;right:0;z-index:9999;
-    padding:1.2rem 2rem;text-align:center;
-    background:linear-gradient(135deg,#059669,#10B981);
-    color:white;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;
-    box-shadow:0 4px 20px rgba(5,150,105,0.3);
-    animation:slideDown 0.5s ease-out;
-  `;
-  banner.innerHTML = '🎉 Booking confirmed! Check your email for your receipt. We can\'t wait to host you in Austin! <span style="cursor:pointer;margin-left:1rem;opacity:0.7" onclick="this.parentElement.remove()">✕</span>';
-  document.body.prepend(banner);
-  // Clean URL
-  history.replaceState({}, '', window.location.pathname);
-}
-
-// ===== VIDEO CROSSFADE =====
-(() => {
-  const videos = document.querySelectorAll('.hero-vid');
-  if (videos.length < 2) return;
-  let current = 0;
-  const INTERVAL = 8000; // 8 seconds per clip
-
-  // Start all videos (they're muted so autoplay works)
-  videos.forEach(v => {
-    v.play().catch(() => {}); // handle autoplay restrictions gracefully
-  });
-
-  setInterval(() => {
-    videos[current].classList.remove('active');
-    current = (current + 1) % videos.length;
-    videos[current].classList.add('active');
-  }, INTERVAL);
-})();
-
 // Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
@@ -1688,49 +1595,34 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     renderCalendar();
   });
 
-  // ===== STRIPE API CONFIG =====
-  // After deploying to Railway, replace this URL with your Railway app URL
-  const BOOKING_API = 'https://blue-agave-api-production.up.railway.app/api/create-checkout';
-
-  btnStripe.addEventListener('click', async () => {
+  // Stripe checkout button
+  btnStripe.addEventListener('click', () => {
     if (!checkin || !checkout) return;
     const nights = Math.round((checkout - checkin) / (1000*60*60*24));
-    const guests = parseInt(document.getElementById('guestSelect').value);
+    const guests = document.getElementById('guestSelect').value;
     const total = (nights * NIGHTLY + CLEANING) * 100; // cents
 
+    // TODO: Replace with your Netlify/Vercel serverless function URL
+    // that creates a Stripe Checkout Session and returns the URL
     const payload = {
       checkin: checkin.toISOString().split('T')[0],
       checkout: checkout.toISOString().split('T')[0],
-      nights,
-      guests,
-      total_cents: total,
+      nights, guests, total_cents: total,
+      property: 'blue-austin-agave-ranch-house'
     };
 
-    // Show loading state
-    btnStripe.disabled = true;
-    btnStripe.textContent = 'Connecting to Stripe...';
-
-    try {
-      const res = await fetch(BOOKING_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (data.url) {
-        // Redirect to Stripe Checkout
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || 'Failed to create checkout');
-      }
-    } catch (err) {
-      console.error('Booking error:', err);
-      alert('Something went wrong connecting to payment. Please try again or book via Airbnb.');
-      btnStripe.disabled = false;
-      btnStripe.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Book & Pay with Stripe`;
-    }
+    alert(
+      `🚀 Stripe Checkout Ready!\n\n` +
+      `Check-in: ${payload.checkin}\n` +
+      `Check-out: ${payload.checkout}\n` +
+      `Nights: ${nights}\n` +
+      `Guests: ${guests}\n` +
+      `Total: $${(total/100).toLocaleString()}\n\n` +
+      `To go live, connect your Stripe account\n` +
+      `and deploy the serverless function.\n` +
+      `(See console for the payload.)`
+    );
+    console.log('Stripe payload:', JSON.stringify(payload, null, 2));
   });
 
   renderCalendar();
