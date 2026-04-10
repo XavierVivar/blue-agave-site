@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Austin Agave Ranch — Austin, TX</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --electric-coral: #FF5E3A;
+  --coral-glow: #FF7F5C;
+  --desert-gold: #FFBE2E;
+  --sunset-pink: #FF6B8A;
+  --deep-teal: #0A4D4A;
+  --bright-teal: #00BFA5;
+  --neon-lime: #C6F135;
+  --ink: #0D0D0D;
+  --off-black: #1A1A1A;
+  --graphite: #2D2D2D;
+  --warm-gray: #F7F5F2;
+  --pure-white: #FFFFFF;
+  --glass-white: rgba(255,255,255,0.08);
+  --glass-white-strong: rgba(255,255,255,0.14);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--ink);
+  background: var(--warm-gray);
+  overflow-x: hidden;
+}
+
+/* ===== BLOB BACKGROUND ===== */
+.blob-bg {
+  position: fixed; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+}
+.blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); opacity: 0.12;
+  animation: blobFloat 20s ease-in-out infinite alternate;
+}
+.blob-1 { width: 600px; height: 600px; background: var(--electric-coral); top: -10%; right: -5%; animation-delay: 0s; }
+.blob-2 { width: 500px; height: 500px; background: var(--desert-gold); bottom: 10%; left: -8%; animation-delay: -7s; }
+.blob-3 { width: 400px; height: 400px; background: var(--bright-teal); top: 40%; right: 20%; animation-delay: -14s; }
+@keyframes blobFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(10px, -10px) scale(1.02); }
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all 0.4s;
+}
+nav.scrolled {
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(16px);
+  padding: 0.75rem 2.5rem;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--pure-white);
+}
+.nav-brand span {
+  background: linear-gradient(135deg, var(--electric-coral), var(--desert-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; text-decoration: none;
+  color: rgba(255,255,255,0.7); transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--pure-white); }
+.nav-book {
+  background: var(--electric-coral) !important;
+  color: var(--pure-white) !important;
+  padding: 0.55rem 1.3rem !important;
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s !important;
+}
+.nav-book:hover { background: var(--coral-glow) !important; transform: scale(1.05); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  background: var(--ink);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 8rem 4rem 5rem;
+  position: relative; overflow: hidden;
+}
+
+/* ===== VIDEO BACKGROUND ===== */
+.hero-video-wrap {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden;
+}
+.hero-video-wrap video {
+  position: absolute;
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
+}
+.hero-video-wrap video.active {
+  opacity: 1;
+}
+/* Dark + color overlay on top of videos */
+.hero-video-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(13,13,13,0.45) 0%,
+      rgba(13,13,13,0.25) 30%,
+      rgba(13,13,13,0.5) 70%,
+      rgba(13,13,13,0.85) 100%
+    );
+  pointer-events: none;
+}
+.hero-video-overlay::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255,94,58,0.12), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 70%, rgba(0,191,165,0.08), transparent 50%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,190,46,0.06), transparent 40%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255,94,58,0.15), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 70%, rgba(0,191,165,0.1), transparent 50%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(255,190,46,0.08), transparent 40%);
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-content { position: relative; z-index: 3; max-width: 900px; }
+
+/* ===== HOWDY NEON ===== */
+.howdy {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(5rem, 14vw, 11rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(
+    90deg,
+    #FF3B3B,
+    #FF6B2B,
+    #FFD02B,
+    #4ADE80,
+    #22D3EE,
+    #A78BFA,
+    #F472B6,
+    #FF3B3B
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: howdyRainbow 3s linear infinite, howdyDrop 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  filter: drop-shadow(0 0 40px rgba(255,107,43,0.25)) drop-shadow(0 0 80px rgba(164,139,250,0.15));
+  position: relative;
+  display: inline-block;
+}
+.howdy::after {
+  content: 'HOWDY!';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    90deg,
+    #FF3B3B,
+    #FF6B2B,
+    #FFD02B,
+    #4ADE80,
+    #22D3EE,
+    #A78BFA,
+    #F472B6,
+    #FF3B3B
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: howdyRainbow 3s linear infinite;
+  filter: blur(28px);
+  opacity: 0.5;
+  z-index: -1;
+}
+@keyframes howdyRainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+@keyframes howdyDrop {
+  0% { opacity: 0; transform: translateY(-40px) rotate(-4deg) scale(1.1); }
+  60% { transform: translateY(4px) rotate(1deg) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+/* little wobble on hover */
+.howdy:hover {
+  animation: howdyRainbow 1.5s linear infinite, howdyWobble 0.5s ease-in-out;
+}
+@keyframes howdyWobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg) scale(1.03); }
+  50% { transform: rotate(2deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ===== YIPPEE-KI-YAY NEON ===== */
+.yippee {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(
+    90deg,
+    #F472B6,
+    #A78BFA,
+    #22D3EE,
+    #4ADE80,
+    #FFD02B,
+    #FF6B2B,
+    #FF3B3B,
+    #F472B6
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yippeeRainbow 4s linear infinite, yippeeSlide 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  filter: drop-shadow(0 0 30px rgba(167,139,250,0.25)) drop-shadow(0 0 60px rgba(244,114,182,0.15));
+  position: relative;
+  display: inline-block;
+}
+.yippee::after {
+  content: 'Yippee-ki-yay';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    90deg,
+    #F472B6,
+    #A78BFA,
+    #22D3EE,
+    #4ADE80,
+    #FFD02B,
+    #FF6B2B,
+    #FF3B3B,
+    #F472B6
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: yippeeRainbow 4s linear infinite;
+  filter: blur(24px);
+  opacity: 0.45;
+  z-index: -1;
+}
+@keyframes yippeeRainbow {
+  0% { background-position: 300% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes yippeeSlide {
+  0% { opacity: 0; transform: translateX(-50px) skewX(-6deg); }
+  60% { transform: translateX(6px) skewX(1deg); }
+  100% { opacity: 1; transform: translateX(0) skewX(0deg); }
+}
+.yippee:hover {
+  animation: yippeeRainbow 1.5s linear infinite, howdyWobble 0.5s ease-in-out;
+}
+
+/* ===== KEEP AUSTIN WEIRD NEON ===== */
+.keepweird {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.4rem, 7vw, 4.8rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(
+    90deg,
+    #22D3EE,
+    #4ADE80,
+    #FFD02B,
+    #FF6B2B,
+    #F472B6,
+    #A78BFA,
+    #22D3EE
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: weirdRainbow 5s linear infinite, weirdPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  filter: drop-shadow(0 0 30px rgba(34,211,238,0.2)) drop-shadow(0 0 60px rgba(74,222,128,0.12));
+  position: relative;
+  display: inline-block;
+}
+.keepweird::after {
+  content: 'Keep Austin Weird';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    90deg,
+    #22D3EE,
+    #4ADE80,
+    #FFD02B,
+    #FF6B2B,
+    #F472B6,
+    #A78BFA,
+    #22D3EE
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: weirdRainbow 5s linear infinite;
+  filter: blur(22px);
+  opacity: 0.4;
+  z-index: -1;
+}
+@keyframes weirdRainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+@keyframes weirdPop {
+  0% { opacity: 0; transform: scale(0.6) rotate(6deg); }
+  50% { transform: scale(1.06) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.keepweird:hover {
+  animation: weirdRainbow 1.5s linear infinite, howdyWobble 0.5s ease-in-out;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--glass-white);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  font-size: 0.78rem; font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.8s ease-out;
+}
+.hero-pill .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bright-teal);
+  box-shadow: 0 0 8px var(--bright-teal);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+  font-weight: 700; line-height: 1.0;
+  color: var(--pure-white);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s ease-out;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--electric-coral), var(--desert-gold), var(--sunset-pink));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero p {
+  font-size: 1.2rem; font-weight: 300; line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+  max-width: 550px; margin-bottom: 2.5rem;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeUp 1s ease-out 0.4s both;
+}
+.btn-bold {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 1rem 2.2rem;
+  background: linear-gradient(135deg, var(--electric-coral), var(--sunset-pink));
+  color: var(--pure-white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; border: none; border-radius: 50px;
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(255,94,58,0.3);
+}
+.btn-bold:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,94,58,0.45); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 1rem 2.2rem;
+  background: transparent;
+  color: var(--pure-white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem; font-weight: 500;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px; cursor: pointer; transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: var(--glass-white); }
+
+/* ===== AIRBNB BUTTON ===== */
+.btn-airbnb {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 1rem 2.2rem;
+  background: rgba(255,255,255,0.06);
+  color: var(--pure-white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem; font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(255,88,93,0.4);
+  border-radius: 50px; cursor: pointer; transition: all 0.3s;
+}
+.btn-airbnb:hover {
+  background: rgba(255,88,93,0.15);
+  border-color: #FF585D;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,88,93,0.2);
+}
+
+/* ===== BEATS AIRBNB TAG ===== */
+.beats-tag {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  margin-top: 1.5rem;
+  background: linear-gradient(
+    90deg,
+    #4ADE80,
+    #22D3EE,
+    #818CF8,
+    #C084FC,
+    #F472B6,
+    #22D3EE,
+    #4ADE80
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: beatsRainbow 3.5s linear infinite, beatsBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+  filter: drop-shadow(0 0 20px rgba(74,222,128,0.2)) drop-shadow(0 0 50px rgba(129,140,248,0.12));
+  position: relative;
+  display: inline-block;
+}
+.beats-tag::after {
+  content: 'Beats Airbnb pricing ;)';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    90deg,
+    #4ADE80,
+    #22D3EE,
+    #818CF8,
+    #C084FC,
+    #F472B6,
+    #22D3EE,
+    #4ADE80
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: beatsRainbow 3.5s linear infinite;
+  filter: blur(20px);
+  opacity: 0.45;
+  z-index: -1;
+}
+@keyframes beatsRainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+@keyframes beatsBounce {
+  0% { opacity: 0; transform: translateY(16px) rotate(2deg); }
+  50% { transform: translateY(-4px) rotate(-1deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+.beats-tag:hover {
+  animation: beatsRainbow 1.2s linear infinite, howdyWobble 0.5s ease-in-out;
+}
+
+/* ===== STATS STRIP ===== */
+.stats-strip {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  background: var(--off-black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.stat-item {
+  padding: 2rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--glass-white); }
+.stat-number {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--electric-coral), var(--desert-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-label {
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-top: 0.25rem;
+}
+
+/* ===== SECTIONS SHARED ===== */
+section { padding: 7rem 4rem; }
+.stag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--electric-coral); margin-bottom: 1rem;
+}
+.stag::before {
+  content: ''; display: block; width: 24px; height: 2px;
+  background: linear-gradient(90deg, var(--electric-coral), var(--desert-gold));
+}
+.stitle {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700; line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+.ssub {
+  font-size: 1.05rem; font-weight: 300; line-height: 1.7;
+  color: var(--graphite); opacity: 0.7;
+  max-width: 560px;
+}
+
+/* ===== ABOUT ===== */
+.about {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 5rem; align-items: center;
+  background: var(--warm-gray);
+}
+.about-visual {
+  position: relative;
+}
+.about-img-main {
+  width: 100%; aspect-ratio: 3/4;
+  border-radius: 16px;
+  background: linear-gradient(160deg, var(--deep-teal), var(--bright-teal));
+  position: relative; overflow: hidden;
+}
+.about-img-main::after {
+  content: '📷 Hero Photo';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: rgba(255,255,255,0.7);
+}
+.about-float-card {
+  position: absolute; bottom: -2rem; right: -2rem;
+  background: var(--pure-white);
+  padding: 1.5rem 2rem;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  display: flex; align-items: center; gap: 1rem;
+}
+.afc-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--electric-coral), var(--desert-gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.afc-text .afc-label { font-size: 0.7rem; color: var(--graphite); opacity: 0.6; text-transform: uppercase; letter-spacing: 0.08em; }
+.afc-text .afc-value { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; }
+.about-text p {
+  font-size: 1.05rem; font-weight: 300; line-height: 1.85;
+  color: var(--graphite); margin-top: 1.5rem;
+}
+.about-tags {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem;
+}
+.about-tags span {
+  padding: 0.45rem 1rem;
+  background: var(--pure-white);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 50px;
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--graphite);
+  transition: all 0.3s;
+}
+.about-tags span:hover {
+  background: var(--electric-coral); color: var(--pure-white);
+  border-color: var(--electric-coral); transform: translateY(-2px);
+}
+
+/* ===== AMENITIES ===== */
+.amenities {
+  background: var(--ink); color: var(--pure-white);
+  position: relative; overflow: hidden;
+}
+.amenities::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 50% at 80% 20%, rgba(255,94,58,0.06), transparent),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,191,165,0.05), transparent);
+}
+.amenities .stag { color: var(--neon-lime); }
+.amenities .stag::before { background: var(--neon-lime); }
+.amenities .stitle { color: var(--pure-white); }
+.amenities .ssub { color: rgba(255,255,255,0.5); }
+.amen-header { position: relative; z-index: 2; margin-bottom: 3.5rem; }
+.amen-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 1.2rem; max-width: 1100px;
+}
+.amen-card {
+  background: var(--glass-white);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 2rem 1.8rem;
+  border-radius: 16px;
+  transition: all 0.4s;
+  position: relative; overflow: hidden;
+}
+.amen-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 0;
+  background: linear-gradient(180deg, rgba(255,94,58,0.08), transparent);
+  transition: height 0.4s;
+}
+.amen-card:hover::before { height: 100%; }
+.amen-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,94,58,0.3);
+  box-shadow: 0 12px 40px rgba(255,94,58,0.1);
+}
+.amen-emoji { font-size: 2.2rem; margin-bottom: 1rem; }
+.amen-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem; font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.amen-card p {
+  font-size: 0.85rem; font-weight: 300;
+  color: rgba(255,255,255,0.5); line-height: 1.6;
+}
+
+/* ===== GALLERY ===== */
+.gallery-section { background: var(--warm-gray); }
+.gallery-header { margin-bottom: 3rem; }
+.gallery-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 140px;
+  gap: 0.8rem;
+  max-width: 1200px;
+}
+.gal-item {
+  border-radius: 12px; overflow: hidden;
+  position: relative; cursor: pointer;
+  transition: all 0.4s;
+}
+.gal-item:hover { transform: scale(1.02); z-index: 2; }
+.gal-item::after {
+  content: '📷';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; opacity: 0.4;
+}
+.gal-item:nth-child(1) {
+  grid-column: 1/8; grid-row: 1/4;
+  background: linear-gradient(135deg, var(--electric-coral), var(--sunset-pink));
+}
+.gal-item:nth-child(2) {
+  grid-column: 8/13; grid-row: 1/3;
+  background: linear-gradient(135deg, var(--deep-teal), var(--bright-teal));
+}
+.gal-item:nth-child(3) {
+  grid-column: 8/10; grid-row: 3/4;
+  background: linear-gradient(135deg, var(--desert-gold), var(--coral-glow));
+}
+.gal-item:nth-child(4) {
+  grid-column: 10/13; grid-row: 3/4;
+  background: linear-gradient(135deg, var(--graphite), var(--deep-teal));
+}
+.gal-note {
+  text-align: center; margin-top: 1.5rem;
+  font-size: 0.82rem; color: var(--graphite); opacity: 0.4;
+  font-style: italic;
+}
+
+/* ===== LOCATION ===== */
+.location-section {
+  background: var(--pure-white);
+}
+.loc-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; margin-top: 3rem; align-items: start;
+}
+.loc-cards { display: flex; flex-direction: column; gap: 1rem; }
+.loc-card {
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  padding: 1.5rem;
+  background: var(--warm-gray);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.3s;
+}
+.loc-card:hover {
+  transform: translateX(8px);
+  border-color: var(--electric-coral);
+  box-shadow: 0 8px 24px rgba(255,94,58,0.08);
+}
+.loc-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.loc-card:nth-child(1) .loc-icon { background: linear-gradient(135deg, var(--electric-coral), var(--sunset-pink)); }
+.loc-card:nth-child(2) .loc-icon { background: linear-gradient(135deg, var(--desert-gold), var(--coral-glow)); }
+.loc-card:nth-child(3) .loc-icon { background: linear-gradient(135deg, var(--deep-teal), var(--bright-teal)); }
+.loc-card:nth-child(4) .loc-icon { background: linear-gradient(135deg, var(--sunset-pink), var(--electric-coral)); }
+.loc-card h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem;
+}
+.loc-card p { font-size: 0.85rem; font-weight: 300; color: var(--graphite); opacity: 0.7; line-height: 1.5; }
+.loc-map {
+  aspect-ratio: 1; border-radius: 16px;
+  background: var(--warm-gray);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--graphite); opacity: 0.5;
+  border: 2px dashed rgba(0,0,0,0.08);
+}
+
+/* ===== BOOKING ===== */
+.booking-section {
+  background: var(--ink); color: var(--pure-white);
+  position: relative; overflow: hidden;
+}
+.booking-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,94,58,0.1), transparent 60%);
+}
+.book-content { position: relative; z-index: 2; text-align: center; }
+.booking-section .stag { color: var(--desert-gold); }
+.booking-section .stag::before { background: var(--desert-gold); }
+.booking-section .stitle { color: var(--pure-white); }
+.booking-section .ssub { color: rgba(255,255,255,0.5); margin: 0 auto; }
+
+.platform-row {
+  display: flex; justify-content: center; gap: 1.5rem;
+  margin: 3rem 0 2.5rem; flex-wrap: wrap;
+}
+.platform-card {
+  background: var(--glass-white);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 2.5rem 3rem;
+  border-radius: 18px;
+  text-align: center;
+  min-width: 240px;
+  transition: all 0.4s;
+  text-decoration: none; color: inherit;
+  display: block;
+}
+.platform-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--electric-coral);
+  box-shadow: 0 16px 50px rgba(255,94,58,0.15);
+  background: var(--glass-white-strong);
+}
+.plat-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+.platform-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--pure-white); margin-bottom: 0.3rem;
+}
+.platform-card p { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+
+.divider-line {
+  display: flex; align-items: center; gap: 1.5rem;
+  max-width: 400px; margin: 0 auto 2.5rem;
+  color: rgba(255,255,255,0.3); font-size: 0.82rem;
+  font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.divider-line::before, .divider-line::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+}
+
+/* ===== INQUIRY FORM ===== */
+.inquiry-box {
+  max-width: 580px; margin: 0 auto;
+  background: var(--glass-white);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: left;
+}
+.inquiry-box h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem; font-weight: 600;
+  text-align: center; margin-bottom: 0.3rem;
+}
+.inquiry-box .iq-sub {
+  text-align: center; font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 2rem;
+}
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem; }
+.f-group { margin-bottom: 0.8rem; }
+.f-group label {
+  display: block; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 0.35rem;
+}
+.f-group input, .f-group textarea, .f-group select {
+  width: 100%; padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem; color: var(--pure-white);
+  transition: border-color 0.3s;
+}
+.f-group input::placeholder, .f-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+.f-group input:focus, .f-group textarea:focus, .f-group select:focus {
+  outline: none; border-color: var(--electric-coral);
+}
+.f-group select option { background: var(--ink); color: var(--pure-white); }
+.f-group textarea { resize: vertical; min-height: 90px; }
+.btn-submit-modern {
+  width: 100%; padding: 1rem;
+  background: linear-gradient(135deg, var(--electric-coral), var(--sunset-pink));
+  color: var(--pure-white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem; font-weight: 600;
+  letter-spacing: 0.04em;
+  border: none; border-radius: 50px;
+  cursor: pointer; transition: all 0.3s;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 20px rgba(255,94,58,0.25);
+}
+.btn-submit-modern:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,94,58,0.4); }
+
+/* ===== BOOKING CALENDAR ===== */
+.booking-cal {
+  max-width: 820px; margin: 0 auto;
+  background: var(--glass-white-strong);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 22px;
+  text-align: left;
+}
+.booking-cal > h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem; font-weight: 600;
+  text-align: center; margin-bottom: 0.3rem;
+  color: var(--pure-white);
+}
+.direct-badge {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: linear-gradient(135deg, var(--neon-lime), #A3E635);
+  color: var(--ink);
+  padding: 0.25rem 0.7rem;
+  border-radius: 50px;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+.cal-layout {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 2rem; margin-top: 1.5rem;
+}
+/* Calendar Panel */
+.cal-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; padding: 1.5rem;
+}
+.cal-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1rem;
+}
+.cal-month-label {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--pure-white);
+}
+.cal-arrow {
+  width: 36px; height: 36px;
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.12);
+  background: transparent; color: var(--pure-white);
+  font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.cal-arrow:hover { background: var(--glass-white); border-color: var(--electric-coral); }
+.cal-weekdays {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  text-align: center; margin-bottom: 0.5rem;
+}
+.cal-weekdays span {
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 0.4rem 0;
+}
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 500;
+  border-radius: 10px; cursor: pointer;
+  color: rgba(255,255,255,0.8);
+  transition: all 0.2s;
+  position: relative;
+}
+.cal-day:hover:not(.blocked):not(.empty):not(.past) {
+  background: var(--glass-white-strong);
+}
+.cal-day.empty { cursor: default; }
+.cal-day.past { color: rgba(255,255,255,0.15); cursor: default; }
+.cal-day.blocked {
+  color: rgba(255,255,255,0.2);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.cal-day.selected {
+  background: var(--electric-coral);
+  color: var(--pure-white);
+  font-weight: 700;
+}
+.cal-day.in-range {
+  background: rgba(255,94,58,0.2);
+  color: var(--pure-white);
+}
+.cal-day.today::after {
+  content: '';
+  position: absolute; bottom: 4px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--bright-teal);
+}
+.cal-legend {
+  display: flex; gap: 1rem; margin-top: 1rem;
+  justify-content: center;
+}
+.leg-item {
+  display: flex; align-items: center; gap: 0.35rem;
+  font-size: 0.7rem; color: rgba(255,255,255,0.4);
+}
+.leg-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.leg-avail { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); }
+.leg-selected { background: var(--electric-coral); }
+.leg-blocked { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); }
+
+/* Summary Panel */
+.cal-summary { display: flex; flex-direction: column; gap: 0; }
+.sum-rate { margin-bottom: 1.2rem; }
+.sum-rate-amount {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--electric-coral), var(--desert-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sum-rate-label {
+  font-size: 0.9rem; color: rgba(255,255,255,0.4);
+  margin-left: 0.2rem;
+}
+.sum-dates {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.sum-date-box {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 0.8rem 1rem;
+}
+.sum-date-label {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 0.2rem;
+}
+.sum-date-value {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--pure-white);
+}
+.sum-date-arrow { color: rgba(255,255,255,0.2); font-size: 1.2rem; }
+.sum-breakdown {
+  margin-top: 1.2rem; padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sum-line {
+  display: flex; justify-content: space-between;
+  font-size: 0.88rem; color: rgba(255,255,255,0.55);
+  padding: 0.4rem 0;
+}
+.sum-line.sum-total {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 0.5rem; padding-top: 0.8rem;
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--pure-white);
+}
+.btn-stripe {
+  width: 100%; padding: 1rem;
+  margin-top: 1.2rem;
+  background: linear-gradient(135deg, #635BFF, #7C6EFF);
+  color: var(--pure-white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem; font-weight: 600;
+  border: none; border-radius: 50px;
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(99,91,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-stripe:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(99,91,255,0.45);
+}
+.btn-stripe:disabled {
+  opacity: 0.4; cursor: not-allowed;
+}
+.stripe-note {
+  text-align: center; margin-top: 0.6rem;
+  font-size: 0.72rem; color: rgba(255,255,255,0.25);
+}
+
+@media (max-width: 900px) {
+  .cal-layout { grid-template-columns: 1fr; }
+  .booking-cal { padding: 1.5rem; }
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--off-black);
+  padding: 3rem 4rem;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.foot-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--pure-white);
+}
+.foot-brand span {
+  background: linear-gradient(135deg, var(--electric-coral), var(--desert-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.foot-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+.foot-links a {
+  color: rgba(255,255,255,0.4); text-decoration: none;
+  font-size: 0.82rem; margin-left: 1.5rem;
+  transition: color 0.3s;
+}
+.foot-links a:hover { color: var(--electric-coral); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  section { padding: 4.5rem 1.5rem; }
+  nav { padding: 0.8rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .stats-strip { grid-template-columns: repeat(2,1fr); }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-float-card { right: 0.5rem; bottom: -1.5rem; }
+  .gallery-mosaic {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 160px;
+  }
+  .gal-item:nth-child(1) { grid-column: 1/-1; grid-row: auto; }
+  .gal-item:nth-child(2) { grid-column: auto; grid-row: auto; }
+  .gal-item:nth-child(3) { grid-column: auto; grid-row: auto; }
+  .gal-item:nth-child(4) { grid-column: 1/-1; grid-row: auto; }
+  .loc-grid { grid-template-columns: 1fr; }
+  .platform-row { flex-direction: column; align-items: center; }
+  .f-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; padding: 2.5rem 1.5rem; }
+  .foot-links a { margin: 0 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="blob-bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">Blue Austin <span>Agave Ranch</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#location">Location</a>
+    <a href="#booking" class="nav-book">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Video Background -->
+  <div class="hero-video-wrap" id="videoWrap">
+    <!--
+      HOW TO ADD YOUR VIDEOS:
+      1. Download 3-5 free Austin clips from pexels.com/search/videos/austin%20texas/
+         or pixabay.com/videos/search/austin/ (royalty-free, no attribution needed)
+      2. Recommended clips: skyline aerial, Congress Ave, Lady Bird Lake, South Congress, live music
+      3. Keep files under 10MB each for fast loading (use 720p or 1080p)
+      4. Place the .mp4 files in your site folder and update the src paths below
+      5. The system auto-crossfades between videos every 8 seconds
+    -->
+    <video class="hero-vid active" src="https://videos.pexels.com/video-files/3888545/3888545-hd_1920_1080_24fps.mp4" muted autoplay loop playsinline></video>
+    <video class="hero-vid" src="https://videos.pexels.com/video-files/3888483/3888483-hd_1920_1080_24fps.mp4" muted autoplay loop playsinline></video>
+    <video class="hero-vid" src="https://videos.pexels.com/video-files/4767720/4767720-hd_1920_1080_30fps.mp4" muted autoplay loop playsinline></video>
+  </div>
+  <div class="hero-video-overlay"></div>
+
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-pill"><span class="dot"></span> Now Accepting Reservations</div>
+    <div class="howdy">HOWDY!</div>
+    <h1>Stay in the <span class="gradient-text">Heart of Austin</span></h1>
+    <p>A vibrant 3-bedroom home where Texas sunsets, world-class tacos, and live music are all just minutes away. This is Austin — done right.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-bold">Book Direct & Save →</a>
+      <a href="#" class="btn-airbnb">🏠 Book via Airbnb</a>
+    </div>
+    <div class="beats-tag">Beats Airbnb pricing ;)</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-number">3</div>
+    <div class="stat-label">Bedrooms</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">2</div>
+    <div class="stat-label">Bathrooms</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Max Guests</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">★</div>
+    <div class="stat-label">Superhost</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-img-main"></div>
+    <div class="about-float-card">
+      <div class="afc-icon">⭐</div>
+      <div class="afc-text">
+        <div class="afc-label">Guest Favorite</div>
+        <div class="afc-value">Top 5% in Austin</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="stag">About the Home</div>
+    <h2 class="stitle">Designed for Memorable Stays</h2>
+    <p>Blue Austin Agave Ranch isn't just a place to sleep — it's your Austin basecamp. We've filled every room with natural light, modern comforts, and the kind of thoughtful touches that make guests rebook before they've even checked out.</p>
+    <p>Three spacious bedrooms, a fully loaded kitchen, a backyard patio built for evening hangs, and a location that puts you right in the action.</p>
+    <div class="about-tags">
+      <span>🌿 Private Patio</span>
+      <span>☕ Coffee Bar</span>
+      <span>🎮 Smart TV</span>
+      <span>🛏️ King Beds</span>
+      <span>🐕 Pet Friendly</span>
+      <span>🚗 Free Parking</span>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities" id="amenities">
+  <div class="amen-header">
+    <div class="stag">Everything You Need</div>
+    <div class="yippee">Yippee-ki-yay</div>
+    <h2 class="stitle">Amenities</h2>
+    <p class="ssub">Fully stocked so you can focus on the fun stuff</p>
+  </div>
+  <div class="amen-grid">
+    <div class="amen-card reveal">
+      <div class="amen-emoji">🍳</div>
+      <h3>Chef's Kitchen</h3>
+      <p>Full-size appliances, cookware, spices — everything for a proper home-cooked meal.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">🌳</div>
+      <h3>Backyard Patio</h3>
+      <p>Covered outdoor seating, a grill, and string lights for perfect Austin evenings.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">📶</div>
+      <h3>Gigabit Wi-Fi</h3>
+      <p>High-speed fiber throughout. Work, stream, game — zero buffering.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">❄️</div>
+      <h3>Climate Control</h3>
+      <p>Central AC & heat — because Texas weather does whatever it wants.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">🚗</div>
+      <h3>Free Parking</h3>
+      <p>Dedicated driveway spots. No meters, no apps, no circling the block.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">🧺</div>
+      <h3>Washer & Dryer</h3>
+      <p>In-unit laundry. Pack light, stay fresh.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">👶</div>
+      <h3>Family Ready</h3>
+      <p>Pack 'n play, high chair, and kid-proof extras on request.</p>
+    </div>
+    <div class="amen-card reveal">
+      <div class="amen-emoji">🎸</div>
+      <h3>Local Guidebook</h3>
+      <p>Our curated picks for food, music, swimming holes, and hidden gems.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header reveal">
+    <div class="stag">Take a Look</div>
+    <h2 class="stitle">Gallery</h2>
+    <p class="ssub">Your photos will make this come alive</p>
+  </div>
+  <div class="gallery-mosaic">
+    <div class="gal-item reveal"></div>
+    <div class="gal-item reveal"></div>
+    <div class="gal-item reveal"></div>
+    <div class="gal-item reveal"></div>
+  </div>
+  <p class="gal-note">Swap these color blocks with your actual property photos</p>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="reveal">
+    <div class="stag">The Neighborhood</div>
+    <div class="keepweird">Keep Austin Weird</div>
+    <h2 class="stitle">Right Where You Want to Be</h2>
+    <p class="ssub">Austin's best is right outside your door.</p>
+  </div>
+  <div class="loc-grid">
+    <div class="loc-cards">
+      <div class="loc-card reveal">
+        <div class="loc-icon">🎵</div>
+        <div>
+          <h4>Live Music Everywhere</h4>
+          <p>The Continental Club, Mohawk, Stubb's, Antone's — minutes away.</p>
+        </div>
+      </div>
+      <div class="loc-card reveal">
+        <div class="loc-icon">🌮</div>
+        <div>
+          <h4>Legendary Food</h4>
+          <p>Franklin BBQ, Uchi, Torchy's, and a hundred spots locals swear by.</p>
+        </div>
+      </div>
+      <div class="loc-card reveal">
+        <div class="loc-icon">🏊</div>
+        <div>
+          <h4>Outdoors & Water</h4>
+          <p>Barton Springs, Lady Bird Lake, the Greenbelt — year-round adventure.</p>
+        </div>
+      </div>
+      <div class="loc-card reveal">
+        <div class="loc-icon">🛍️</div>
+        <div>
+          <h4>South Congress</h4>
+          <p>Boutiques, galleries, and the iconic SoCo strip — walkable or a quick ride.</p>
+        </div>
+      </div>
+    </div>
+    <div class="loc-map reveal">🗺️ Embed Google Map</div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div class="book-content">
+    <div class="stag">Reserve Your Stay</div>
+    <h2 class="stitle">Book Blue Austin Agave Ranch</h2>
+    <p class="ssub">Pick your platform or reach out directly</p>
+
+    <div class="platform-row">
+      <a href="#" class="platform-card reveal">
+        <div class="plat-icon">🏠</div>
+        <h3>Airbnb</h3>
+        <p>Book with Airbnb protection & reviews</p>
+      </a>
+      <a href="#" class="platform-card reveal">
+        <div class="plat-icon">🌎</div>
+        <h3>VRBO</h3>
+        <p>Great for families & group trips</p>
+      </a>
+    </div>
+
+    <div class="divider-line">or book directly & save</div>
+
+    <!-- BOOKING CALENDAR -->
+    <div class="booking-cal reveal" id="bookingCal">
+      <h3>Book Direct <span class="direct-badge">Save 10–15%</span></h3>
+      <p class="iq-sub">No platform fees — pay securely via Stripe</p>
+
+      <div class="cal-layout">
+        <!-- Calendar -->
+        <div class="cal-panel">
+          <div class="cal-nav">
+            <button class="cal-arrow" id="calPrev">‹</button>
+            <div class="cal-month-label" id="calMonthLabel">April 2026</div>
+            <button class="cal-arrow" id="calNext">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div class="cal-legend">
+            <span class="leg-item"><span class="leg-dot leg-avail"></span> Available</span>
+            <span class="leg-item"><span class="leg-dot leg-selected"></span> Selected</span>
+            <span class="leg-item"><span class="leg-dot leg-blocked"></span> Booked</span>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="cal-summary">
+          <div class="sum-rate">
+            <span class="sum-rate-amount" id="nightlyRate">$275</span>
+            <span class="sum-rate-label">/ night</span>
+          </div>
+
+          <div class="sum-dates">
+            <div class="sum-date-box">
+              <div class="sum-date-label">Check-in</div>
+              <div class="sum-date-value" id="checkinDisplay">Select date</div>
+            </div>
+            <div class="sum-date-arrow">→</div>
+            <div class="sum-date-box">
+              <div class="sum-date-label">Check-out</div>
+              <div class="sum-date-value" id="checkoutDisplay">Select date</div>
+            </div>
+          </div>
+
+          <div class="f-group" style="margin-top:1rem;">
+            <label>Guests</label>
+            <select id="guestSelect">
+              <option value="1">1 guest</option>
+              <option value="2" selected>2 guests</option>
+              <option value="3">3 guests</option>
+              <option value="4">4 guests</option>
+              <option value="5">5 guests</option>
+              <option value="6">6 guests</option>
+              <option value="7">7 guests</option>
+              <option value="8">8 guests</option>
+            </select>
+          </div>
+
+          <div class="sum-breakdown" id="sumBreakdown" style="display:none;">
+            <div class="sum-line">
+              <span id="nightsLabel">$275 × 0 nights</span>
+              <span id="nightsTotal">$0</span>
+            </div>
+            <div class="sum-line">
+              <span>Cleaning fee</span>
+              <span>$150</span>
+            </div>
+            <div class="sum-line sum-total">
+              <span>Total</span>
+              <span id="totalAmount">$0</span>
+            </div>
+          </div>
+
+          <button class="btn-stripe" id="btnStripe" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Book & Pay with Stripe
+          </button>
+          <p class="stripe-note">You'll be redirected to Stripe's secure checkout</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line">or send an inquiry</div>
+
+    <div class="inquiry-box reveal">
+      <h3>Send Us a Message</h3>
+      <p class="iq-sub">We typically reply within 24 hours</p>
+      <div class="f-row">
+        <div class="f-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane">
+        </div>
+        <div class="f-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="f-group">
+        <label>Email</label>
+        <input type="email" placeholder="jane@email.com">
+      </div>
+      <div class="f-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your trip..."></textarea>
+      </div>
+      <button class="btn-submit-modern">Send Inquiry →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">Blue Austin <span>Agave Ranch</span> · Austin, TX</div>
+  <div class="foot-copy">© 2026 Blue Austin Agave Ranch</div>
+  <div class="foot-links">
+    <a href="#about">About</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#booking">Book</a>
+  </div>
+</footer>
+
+<script>
+// ===== BOOKING SUCCESS CHECK =====
+if (window.location.search.includes('booking=success')) {
+  const banner = document.createElement('div');
+  banner.style.cssText = `
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    padding:1.2rem 2rem;text-align:center;
+    background:linear-gradient(135deg,#059669,#10B981);
+    color:white;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;
+    box-shadow:0 4px 20px rgba(5,150,105,0.3);
+    animation:slideDown 0.5s ease-out;
+  `;
+  banner.innerHTML = '🎉 Booking confirmed! Check your email for your receipt. We can\'t wait to host you in Austin! <span style="cursor:pointer;margin-left:1rem;opacity:0.7" onclick="this.parentElement.remove()">✕</span>';
+  document.body.prepend(banner);
+  // Clean URL
+  history.replaceState({}, '', window.location.pathname);
+}
+
+// ===== VIDEO CROSSFADE =====
+(() => {
+  const videos = document.querySelectorAll('.hero-vid');
+  if (videos.length < 2) return;
+  let current = 0;
+  const INTERVAL = 8000; // 8 seconds per clip
+
+  // Start all videos (they're muted so autoplay works)
+  videos.forEach(v => {
+    v.play().catch(() => {}); // handle autoplay restrictions gracefully
+  });
+
+  setInterval(() => {
+    videos[current].classList.remove('active');
+    current = (current + 1) % videos.length;
+    videos[current].classList.add('active');
+  }, INTERVAL);
+})();
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+
+// Reveal on scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ===== BOOKING CALENDAR =====
+(() => {
+  const NIGHTLY = 275;
+  const CLEANING = 150;
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  // Simulated blocked dates (replace with real data from iCal sync)
+  const blockedDates = new Set([
+    '2026-04-17','2026-04-18','2026-04-19','2026-04-20',
+    '2026-05-01','2026-05-02','2026-05-03',
+    '2026-05-15','2026-05-16','2026-05-17','2026-05-18','2026-05-19',
+    '2026-06-10','2026-06-11','2026-06-12','2026-06-13','2026-06-14',
+  ]);
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+  let checkin = null;
+  let checkout = null;
+
+  const grid = document.getElementById('calGrid');
+  const label = document.getElementById('calMonthLabel');
+  const checkinEl = document.getElementById('checkinDisplay');
+  const checkoutEl = document.getElementById('checkoutDisplay');
+  const breakdown = document.getElementById('sumBreakdown');
+  const nightsLabel = document.getElementById('nightsLabel');
+  const nightsTotal = document.getElementById('nightsTotal');
+  const totalAmount = document.getElementById('totalAmount');
+  const btnStripe = document.getElementById('btnStripe');
+
+  function dateStr(y, m, d) {
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  function formatDisplay(date) {
+    return date ? `${months[date.getMonth()].slice(0,3)} ${date.getDate()}, ${date.getFullYear()}` : 'Select date';
+  }
+
+  function isBlocked(y, m, d) {
+    return blockedDates.has(dateStr(y, m, d));
+  }
+
+  function isPast(y, m, d) {
+    const today = new Date(); today.setHours(0,0,0,0);
+    return new Date(y, m, d) < today;
+  }
+
+  function isToday(y, m, d) {
+    const t = new Date();
+    return y === t.getFullYear() && m === t.getMonth() && d === t.getDate();
+  }
+
+  function inRange(y, m, d) {
+    if (!checkin || !checkout) return false;
+    const dt = new Date(y, m, d);
+    return dt > checkin && dt < checkout;
+  }
+
+  function isSelected(y, m, d) {
+    const dt = new Date(y, m, d).getTime();
+    return (checkin && dt === checkin.getTime()) || (checkout && dt === checkout.getTime());
+  }
+
+  function hasBlockedInRange(start, end) {
+    const d = new Date(start);
+    while (d <= end) {
+      if (blockedDates.has(dateStr(d.getFullYear(), d.getMonth(), d.getDate()))) return true;
+      d.setDate(d.getDate() + 1);
+    }
+    return false;
+  }
+
+  function updateSummary() {
+    checkinEl.textContent = formatDisplay(checkin);
+    checkoutEl.textContent = formatDisplay(checkout);
+    if (checkin && checkout) {
+      const nights = Math.round((checkout - checkin) / (1000*60*60*24));
+      const subtotal = nights * NIGHTLY;
+      const total = subtotal + CLEANING;
+      nightsLabel.textContent = `$${NIGHTLY} × ${nights} night${nights>1?'s':''}`;
+      nightsTotal.textContent = `$${subtotal.toLocaleString()}`;
+      totalAmount.textContent = `$${total.toLocaleString()}`;
+      breakdown.style.display = 'block';
+      btnStripe.disabled = false;
+    } else {
+      breakdown.style.display = 'none';
+      btnStripe.disabled = true;
+    }
+  }
+
+  function handleDayClick(y, m, d) {
+    if (isPast(y, m, d) || isBlocked(y, m, d)) return;
+    const clicked = new Date(y, m, d);
+
+    if (!checkin || (checkin && checkout)) {
+      checkin = clicked;
+      checkout = null;
+    } else {
+      if (clicked <= checkin) {
+        checkin = clicked;
+        checkout = null;
+      } else if (hasBlockedInRange(checkin, clicked)) {
+        checkin = clicked;
+        checkout = null;
+      } else {
+        checkout = clicked;
+      }
+    }
+    updateSummary();
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    label.textContent = `${months[currentMonth]} ${currentYear}`;
+    grid.innerHTML = '';
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      grid.appendChild(el);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day';
+      el.textContent = d;
+
+      if (isPast(currentYear, currentMonth, d)) el.classList.add('past');
+      else if (isBlocked(currentYear, currentMonth, d)) el.classList.add('blocked');
+      else {
+        if (isSelected(currentYear, currentMonth, d)) el.classList.add('selected');
+        else if (inRange(currentYear, currentMonth, d)) el.classList.add('in-range');
+        const y = currentYear, m = currentMonth;
+        el.addEventListener('click', () => handleDayClick(y, m, d));
+      }
+      if (isToday(currentYear, currentMonth, d)) el.classList.add('today');
+
+      grid.appendChild(el);
+    }
+  }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar();
+  });
+
+  // ===== STRIPE API CONFIG =====
+  // After deploying to Railway, replace this URL with your Railway app URL
+  const BOOKING_API = 'https://YOUR-RAILWAY-APP.up.railway.app/api/create-checkout';
+
+  btnStripe.addEventListener('click', async () => {
+    if (!checkin || !checkout) return;
+    const nights = Math.round((checkout - checkin) / (1000*60*60*24));
+    const guests = parseInt(document.getElementById('guestSelect').value);
+    const total = (nights * NIGHTLY + CLEANING) * 100; // cents
+
+    const payload = {
+      checkin: checkin.toISOString().split('T')[0],
+      checkout: checkout.toISOString().split('T')[0],
+      nights,
+      guests,
+      total_cents: total,
+    };
+
+    // Show loading state
+    btnStripe.disabled = true;
+    btnStripe.textContent = 'Connecting to Stripe...';
+
+    try {
+      const res = await fetch(BOOKING_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'Failed to create checkout');
+      }
+    } catch (err) {
+      console.error('Booking error:', err);
+      alert('Something went wrong connecting to payment. Please try again or book via Airbnb.');
+      btnStripe.disabled = false;
+      btnStripe.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Book & Pay with Stripe`;
+    }
+  });
+
+  renderCalendar();
+})();
+</script>
+
+</body>
+</html>
