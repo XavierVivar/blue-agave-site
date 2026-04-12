@@ -660,7 +660,7 @@ section { padding: 7rem 4rem; }
 .amenities .stitle { color: var(--pure-white); }
 .amenities .ssub { color: rgba(255,255,255,0.5); }
 .amen-header { position: relative; z-index: 2; margin-bottom: 3.5rem; }
-.amen-grid {
+.amen-grid { display:none; } .amen-carousel-wrap { position:relative; z-index:2; max-width:1200px; overflow:hidden; } .amen-carousel { display:flex; transition:transform 0.6s cubic-bezier(0.25,0.8,0.25,1); cursor:grab; } .amen-carousel:active { cursor:grabbing; } .amen-category { min-width:100%; flex-shrink:0; padding:0 0.5rem; } .amen-cat-label { font-family:"Fraunces",serif; font-size:1.3rem; font-weight:600; color:#fff; margin-bottom:1.2rem; border-left:3px solid #FF5E3A; padding:0.3rem 0 0.3rem 1rem; } .amen-cat-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; } .amen-scroll-nav { display:flex; align-items:center; justify-content:center; gap:1rem; margin-top:1.5rem; } .amen-arrow { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); background:transparent; color:white; font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s; } .amen-arrow:hover { background:rgba(255,255,255,0.08); border-color:#FF5E3A; } .amen-dots { display:flex; gap:8px; } .amen-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.2); cursor:pointer; transition:all 0.3s; } .amen-dot.active { background:#FF5E3A; transform:scale(1.2); } .OLD-amen-grid {
   position: relative; z-index: 2;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
   gap: 1.2rem; max-width: 1100px;
@@ -1276,7 +1276,52 @@ footer {
     <h2 class="stitle">Amenities</h2>
     <p class="ssub">Fully stocked so you can focus on the fun stuff</p>
   </div>
-  <div class="amen-grid">
+  <div class="amen-carousel-wrap">
+    <div class="amen-carousel" id="amenCarousel">
+      <div class="amen-category"><div class="amen-cat-label">🏠 Home Essentials</div><div class="amen-cat-cards">
+        <div class="amen-card"><div class="amen-emoji">🍳</div><h3>Chef's Kitchen</h3><p>Full-size appliances, cookware, spices, coffee maker, and all the essentials.</p></div>
+        <div class="amen-card"><div class="amen-emoji">❄️</div><h3>Central AC & Heat</h3><p>Smart thermostat — stay comfortable no matter what Texas throws at you.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🧺</div><h3>Washer & Dryer</h3><p>In-unit laundry so you can pack light and stay fresh.</p></div>
+        <div class="amen-card"><div class="amen-emoji">📶</div><h3>Gigabit Wi-Fi</h3><p>High-speed fiber throughout. Work, stream, game — zero buffering.</p></div>
+      </div></div>
+      <div class="amen-category"><div class="amen-cat-label">🌿 Outdoor & Relaxation</div><div class="amen-cat-cards">
+        <div class="amen-card"><div class="amen-emoji">🌳</div><h3>Private Backyard</h3><p>Covered patio with string lights, seating, and room to spread out.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🔥</div><h3>BBQ Grill</h3><p>Gas grill ready for steaks, burgers, and proper Texas cookouts.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🌅</div><h3>Sunset Views</h3><p>Golden hour hits different from the patio. Trust us.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🪑</div><h3>Outdoor Dining</h3><p>Al fresco dining area — perfect for breakfast tacos and evening wine.</p></div>
+      </div></div>
+      <div class="amen-category"><div class="amen-cat-label">🎮 Entertainment</div><div class="amen-cat-cards">
+        <div class="amen-card"><div class="amen-emoji">📺</div><h3>Smart TVs</h3><p>Large smart TVs in living room and bedrooms — Netflix, Hulu, Disney+ ready.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🔊</div><h3>Bluetooth Speaker</h3><p>Portable speaker for music on the patio or by the pool.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🎲</div><h3>Board Games</h3><p>Collection of games for rainy days or family game nights.</p></div>
+        <div class="amen-card"><div class="amen-emoji">📚</div><h3>Book Library</h3><p>Curated reads for the hammock, patio, or bedside table.</p></div>
+      </div></div>
+      <div class="amen-category"><div class="amen-cat-label">🛏️ Comfort & Sleep</div><div class="amen-cat-cards">
+        <div class="amen-card"><div class="amen-emoji">👑</div><h3>King Beds</h3><p>Premium mattresses and hotel-quality linens in every bedroom.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🛁</div><h3>Luxury Bathrooms</h3><p>Rain showerheads, plush towels, and complimentary toiletries.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🌙</div><h3>Blackout Curtains</h3><p>Sleep in as long as you want — total darkness on demand.</p></div>
+        <div class="amen-card"><div class="amen-emoji">☕</div><h3>Coffee Bar</h3><p>Drip coffee, French press, and local Austin roast beans.</p></div>
+      </div></div>
+      <div class="amen-category"><div class="amen-cat-label">✅ Convenience</div><div class="amen-cat-cards">
+        <div class="amen-card"><div class="amen-emoji">🚗</div><h3>Free Parking</h3><p>Dedicated driveway spots. No meters, no apps, no circling the block.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🔑</div><h3>Self Check-In</h3><p>Smart lock with keypad — arrive on your schedule, no waiting around.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🐕</div><h3>Pet Friendly</h3><p>Your furry friend is welcome — bowls and a dog bed provided.</p></div>
+        <div class="amen-card"><div class="amen-emoji">👶</div><h3>Family Ready</h3><p>Pack n play, high chair, baby monitor — just ask.</p></div>
+      </div></div>
+      <div class="amen-category"><div class="amen-cat-label">🎸 Local Austin Experience</div><div class="amen-cat-cards">
+        <div class="amen-card"><div class="amen-emoji">📖</div><h3>Austin Guidebook</h3><p>Our curated picks for BBQ, tacos, live music, and hidden gems.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🚲</div><h3>Bike Available</h3><p>Cruise the neighborhood or ride the trail to Lady Bird Lake.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🗺️</div><h3>Walking Maps</h3><p>Printed maps to SoCo, East 6th, Rainey St, and Mueller shops.</p></div>
+        <div class="amen-card"><div class="amen-emoji">🎵</div><h3>Live Music Tips</h3><p>Weekly updated list of the best shows and secret gigs in town.</p></div>
+      </div></div>
+    </div>
+    <div class="amen-scroll-nav">
+      <button class="amen-arrow" id="amenPrev">&#8249;</button>
+      <div class="amen-dots" id="amenDots"></div>
+      <button class="amen-arrow" id="amenNext">&#8250;</button>
+    </div>
+  </div>
+  <div class="amen-grid" style="display:none;">
     <div class="amen-card reveal">
       <div class="amen-emoji">🍳</div>
       <h3>Chef's Kitchen</h3>
