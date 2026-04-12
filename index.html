@@ -1683,6 +1683,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   // Simulated blocked dates (replace with real data from iCal sync)
   const blockedDates = new Set([]);
 
+  // Sync blocked dates from Airbnb iCal
+  (async () => {
+    try {
+      const res = await fetch('https://blue-agave-api-production.up.railway.app/api/blocked-dates');
+      const data = await res.json();
+      if (data.blocked_dates) {
+        data.blocked_dates.forEach(d => blockedDates.add(d));
+        renderCalendar();
+      }
+    } catch(e) { console.log('Could not sync Airbnb calendar'); }
+  })();
+
   let currentMonth = new Date().getMonth();
   let currentYear = new Date().getFullYear();
   let checkin = null;
