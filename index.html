@@ -1835,6 +1835,60 @@ document.getElementById('btnInquiry').addEventListener('click', async () => {
     btn.textContent = 'Send Inquiry →';
   }
 });
+
+
+// ===== AMENITY CAROUSEL =====
+(() => {
+  const carousel = document.getElementById('amenCarousel');
+  const categories = carousel.querySelectorAll('.amen-category');
+  const dotsContainer = document.getElementById('amenDots');
+  const prevBtn = document.getElementById('amenPrev');
+  const nextBtn = document.getElementById('amenNext');
+  let current = 0;
+  let autoTimer;
+
+  // Create dots
+  categories.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'amen-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(index) {
+    current = index;
+    if (current < 0) current = categories.length - 1;
+    if (current >= categories.length) current = 0;
+    carousel.style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.amen-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    resetAuto();
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // Auto-scroll every 4 seconds
+  function startAuto() {
+    autoTimer = setInterval(() => goTo(current + 1), 4000);
+  }
+  function resetAuto() {
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  // Touch/swipe support
+  let startX = 0;
+  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  carousel.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
+  });
+
+  // Start after 2 seconds
+  setTimeout(startAuto, 2000);
+})();
 </script>
 
 </body>
