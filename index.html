@@ -1681,12 +1681,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   // Simulated blocked dates (replace with real data from iCal sync)
-  const blockedDates = new Set([
-    '2026-04-17','2026-04-18','2026-04-19','2026-04-20',
-    '2026-05-01','2026-05-02','2026-05-03',
-    '2026-05-15','2026-05-16','2026-05-17','2026-05-18','2026-05-19',
-    '2026-06-10','2026-06-11','2026-06-12','2026-06-13','2026-06-14',
-  ]);
+  const blockedDates = new Set([]);
 
   let currentMonth = new Date().getMonth();
   let currentYear = new Date().getFullYear();
