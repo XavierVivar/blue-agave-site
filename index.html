@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blue Austin Agave Ranch — Austin, TX</title>
+<title>Scroll to explore all 40 photos → Drag or swipe to browse</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
 <style>
@@ -697,43 +697,44 @@ section { padding: 7rem 4rem; }
 }
 
 /* ===== GALLERY ===== */
-.gallery-section { background: var(--warm-gray); }
+.gallery-section { background: var(--warm-gray); overflow: hidden; }
 .gallery-header { margin-bottom: 3rem; }
 .gallery-mosaic {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 140px;
-  gap: 0.8rem;
-  max-width: 1200px;
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,94,58,0.3) transparent;
 }
+.gallery-mosaic::-webkit-scrollbar { height: 6px; }
+.gallery-mosaic::-webkit-scrollbar-track { background: transparent; }
+.gallery-mosaic::-webkit-scrollbar-thumb { background: rgba(255,94,58,0.3); border-radius: 3px; }
+.gallery-mosaic::-webkit-scrollbar-thumb:hover { background: rgba(255,94,58,0.5); }
 .gal-item {
   border-radius: 12px; overflow: hidden;
   position: relative; cursor: pointer;
   transition: all 0.4s;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  height: 360px;
 }
 .gal-item:hover { transform: scale(1.02); z-index: 2; }
+.gal-item.gal-wide { width: 500px; }
+.gal-item.gal-tall { width: 280px; }
+.gal-item.gal-square { width: 360px; }
 .gal-item::after {
   content: '📷';
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 2rem; opacity: 0.4;
 }
-.gal-item:nth-child(1) {
-  grid-column: 1/8; grid-row: 1/4;
-  background: url(photo1.jpg) center/cover;
-}
-.gal-item:nth-child(2) {
-  grid-column: 8/13; grid-row: 1/3;
-  background: url(photo2.jpg) center/cover;
-}
-.gal-item:nth-child(3) {
-  grid-column: 8/10; grid-row: 3/4;
-  background: url(photo3.jpg) center/cover;
-}
-.gal-item:nth-child(4) {
-  grid-column: 10/13; grid-row: 3/4;
-  background: url(photo4.jpg) center/cover;
-}
+
+
+
+
 .gal-note {
   text-align: center; margin-top: 1.5rem;
   font-size: 0.82rem; color: var(--graphite); opacity: 0.4;
@@ -1373,12 +1374,48 @@ footer {
     <p class="ssub">Your photos will make this come alive</p>
   </div>
   <div class="gallery-mosaic">
-    <div class="gal-item reveal"></div>
-    <div class="gal-item reveal"></div>
-    <div class="gal-item reveal"></div>
-    <div class="gal-item reveal"></div>
+    <div class="gal-item gal-wide reveal" style="background:url(photo1.jpg) center/cover;"></div>
+    <div class="gal-item gal-square reveal" style="background:url(photo2.jpg) center/cover;"></div>
+    <div class="gal-item gal-tall reveal" style="background:url(photo3.jpg) center/cover;"></div>
+    <div class="gal-item gal-wide reveal" style="background:url(photo4.jpg) center/cover;"></div>
+    <div class="gal-item gal-square reveal" style="background:#2D4A3E;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 5</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#4A2D3E;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 6</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#3E4A2D;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 7</span></div>
+    <div class="gal-item gal-square reveal" style="background:#2D3E4A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 8</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#4A3E2D;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 9</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#3E2D4A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 10</span></div>
+    <div class="gal-item gal-square reveal" style="background:#1A3A2A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 11</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#3A1A2A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 12</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#2A3A1A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 13</span></div>
+    <div class="gal-item gal-square reveal" style="background:#1A2A3A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 14</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#3A2A1A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 15</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#2A1A3A;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 16</span></div>
+    <div class="gal-item gal-square reveal" style="background:#354545;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 17</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#453545;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 18</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#454535;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 19</span></div>
+    <div class="gal-item gal-square reveal" style="background:#354535;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 20</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#453535;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 21</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#354545;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 22</span></div>
+    <div class="gal-item gal-square reveal" style="background:#2B3B3B;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 23</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#3B2B3B;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 24</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#3B3B2B;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 25</span></div>
+    <div class="gal-item gal-square reveal" style="background:#2B3B2B;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 26</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#3B2B2B;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 27</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#2B2B3B;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 28</span></div>
+    <div class="gal-item gal-square reveal" style="background:#1F3030;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 29</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#301F30;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 30</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#30301F;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 31</span></div>
+    <div class="gal-item gal-square reveal" style="background:#1F301F;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 32</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#301F1F;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 33</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#1F1F30;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 34</span></div>
+    <div class="gal-item gal-square reveal" style="background:#283838;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 35</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#382838;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 36</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#383828;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 37</span></div>
+    <div class="gal-item gal-square reveal" style="background:#283828;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 38</span></div>
+    <div class="gal-item gal-wide reveal" style="background:#382828;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 39</span></div>
+    <div class="gal-item gal-tall reveal" style="background:#282838;display:flex;align-items:center;justify-content:center;"><span style="color:rgba(255,255,255,0.2);font-size:0.8rem;">Photo 40</span></div>
   </div>
-  <p class="gal-note">Blue Austin Agave Ranch — Austin, TX</p>
+  <p class="gal-note">Scroll to explore all 40 photos → Drag or swipe to browse</p>
 </section>
 
 <!-- LOCATION -->
