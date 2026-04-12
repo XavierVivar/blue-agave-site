@@ -1373,7 +1373,7 @@ footer {
     <h2 class="stitle">Gallery</h2>
     <p class="ssub">Your photos will make this come alive</p>
   </div>
-    <div class="gallery-mosaic">
+    <div class="gallery-mosaic" id="galleryScroll">
     <div class="gal-item gal-wide reveal" style="background:url(gallery/g01.jpg) center/cover;"></div>
     <div class="gal-item gal-square reveal" style="background:url(gallery/g02.jpg) center/cover;"></div>
     <div class="gal-item gal-tall reveal" style="background:url(gallery/g03.jpg) center/cover;"></div>
@@ -1979,6 +1979,55 @@ document.getElementById('btnInquiry').addEventListener('click', async () => {
 
   // Start after 2 seconds
   setTimeout(startAuto, 2000);
+})();
+
+
+// ===== GALLERY AUTO-SCROLL + DRAG =====
+(() => {
+  const g = document.getElementById('galleryScroll');
+  if (!g) return;
+  let paused = false;
+  let autoScroll;
+  let isDown = false;
+  let startX, scrollLeft;
+
+  // Auto-scroll
+  function startAuto() {
+    autoScroll = setInterval(() => {
+      if (!paused && !isDown) {
+        g.scrollLeft += 1;
+        if (g.scrollLeft >= g.scrollWidth - g.clientWidth) {
+          g.scrollLeft = 0;
+        }
+      }
+    }, 30);
+  }
+
+  // Mouse drag to scroll
+  g.addEventListener('mousedown', (e) => {
+    isDown = true;
+    g.style.cursor = 'grabbing';
+    startX = e.pageX - g.offsetLeft;
+    scrollLeft = g.scrollLeft;
+  });
+  g.addEventListener('mouseleave', () => { isDown = false; g.style.cursor = 'grab'; });
+  g.addEventListener('mouseup', () => { isDown = false; g.style.cursor = 'grab'; });
+  g.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - g.offsetLeft;
+    const walk = (x - startX) * 2;
+    g.scrollLeft = scrollLeft - walk;
+  });
+
+  // Pause auto-scroll on hover
+  g.addEventListener('mouseenter', () => { paused = true; });
+  g.addEventListener('mouseleave', () => { paused = false; isDown = false; });
+  g.addEventListener('touchstart', () => { paused = true; });
+  g.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 3000); });
+
+  // Start after 3 seconds
+  setTimeout(startAuto, 3000);
 })();
 </script>
 
